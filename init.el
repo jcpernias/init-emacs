@@ -37,3 +37,12 @@
 ;; macOS: Use right option key to type \, |, @, and # characters
 (setq ns-right-alternate-modifier (quote none))
 
+;; macOS: Set environment variables as they are set in the shell
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns))
+    (add-to-list 'exec-path-from-shell-variables "TEXMFHOME")
+    (exec-path-from-shell-initialize)))
+
+
