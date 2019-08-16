@@ -15,7 +15,7 @@
 
 ;; Set default frame dimensions
 (setq default-frame-alist
-      '((width . 100) (height . 52)
+      '((width . 90) (height . 52)
 	(vertical-scroll-bars . nil)
 	(horizontal-scroll-bars . nil)))
 
