@@ -47,6 +47,11 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+;; Bind zap-up-to-char instead of zap-to-char
+(autoload 'zap-up-to-char "misc"
+  "Kill up to, but not including ARGth occurrence of CHAR." t)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+
 ;; set up the Emacs package system
 ;; (see http://emacs.stackexchange.com/a/5888)	 
 (require 'package)
