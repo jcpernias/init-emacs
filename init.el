@@ -13,6 +13,9 @@
 (set-face-attribute 'default nil
                     :family "Source Code Pro" :height 150 :weight 'normal)
 
+;; Set default frame dimensions
+(setq default-frame-alist '((width . 100) (height . 52)))
+
 ;; Visible bell: modeline flash  
 (setq visible-bell nil
       ring-bell-function 'flash-mode-line)
