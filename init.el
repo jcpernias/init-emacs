@@ -3,6 +3,13 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+;; Do not show start up screen:
+(setq inhibit-startup-screen t)
+
+;; Do not show initial message in scratch buffer:
+(setq initial-scratch-message nil)
+
+
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
