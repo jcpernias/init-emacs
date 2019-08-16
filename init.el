@@ -43,6 +43,10 @@
 ;; Enable show-paren mode
 (show-paren-mode 1)
 
+;; Line and column numbers in the modeline
+(setq line-number-mode t)
+(setq column-number-mode t)
+
 ;; set up the Emacs package system
 ;; (see http://emacs.stackexchange.com/a/5888)	 
 (require 'package)
