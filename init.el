@@ -36,8 +36,13 @@
     (load custom-file))
 
 
+;; Set backup directory
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
+
+ 
 ;; set up the Emacs package system
-;; (see http://emacs.stackexchange.com/a/5888) 
+;; (see http://emacs.stackexchange.com/a/5888)	 
 (require 'package)
 (setq package-enable-at-startup nil)
 
