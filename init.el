@@ -9,12 +9,18 @@
 ;; Do not show initial message in scratch buffer:
 (setq initial-scratch-message nil)
 
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "Source Code Pro" :height 150 :weight 'normal)
+
 ;; Visible bell: modeline flash  
 (setq visible-bell nil
       ring-bell-function 'flash-mode-line)
 (defun flash-mode-line ()
   (invert-face 'mode-line)
   (run-with-timer 0.1 nil #'invert-face 'mode-line))
+
+
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
