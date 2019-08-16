@@ -40,7 +40,9 @@
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
- 
+;; Enable show-paren mode
+(show-paren-mode 1)
+
 ;; set up the Emacs package system
 ;; (see http://emacs.stackexchange.com/a/5888)	 
 (require 'package)
