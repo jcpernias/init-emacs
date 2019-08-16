@@ -14,7 +14,10 @@
                     :family "Source Code Pro" :height 150 :weight 'normal)
 
 ;; Set default frame dimensions
-(setq default-frame-alist '((width . 100) (height . 52)))
+(setq default-frame-alist
+      '((width . 100) (height . 52)
+	(vertical-scroll-bars . nil)
+	(horizontal-scroll-bars . nil)))
 
 ;; Visible bell: modeline flash  
 (setq visible-bell nil
