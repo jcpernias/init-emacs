@@ -9,7 +9,12 @@
 ;; Do not show initial message in scratch buffer:
 (setq initial-scratch-message nil)
 
-
+;; Visible bell: modeline flash  
+(setq visible-bell nil
+      ring-bell-function 'flash-mode-line)
+(defun flash-mode-line ()
+  (invert-face 'mode-line)
+  (run-with-timer 0.1 nil #'invert-face 'mode-line))
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
@@ -53,3 +58,10 @@
     (exec-path-from-shell-initialize)))
 
 
+;; Load hc-zenburn-theme, a higher contrast version
+;; of the zenburn theme.
+
+(use-package hc-zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'hc-zenburn t t))
