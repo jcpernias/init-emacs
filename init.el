@@ -115,3 +115,50 @@
   ;; Disable VC for Git
   (setq vc-handled-backends (delq 'Git vc-handled-backends))
   (global-magit-file-mode))
+
+;; htmlize exports the contents of an Emacs buffer to HTML
+;; preserving display properties such as colors, fonts, underlining,
+;; etc.
+(use-package htmlize
+  :ensure t)
+
+;; Org mode
+(use-package org
+  :ensure org-plus-contrib
+  :mode ("\\.org$" . org-mode)
+  :init
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-export-backends '(ascii html md beamer))
+
+  :config
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-list-allow-alphabetical t)
+  (setq org-use-speed-commands t)
+
+  ;; Htmlize with css. See the documentation of this variable:
+  (setq org-html-htmlize-output-type 'css)
+  (add-to-list 'safe-local-variable-values
+               '(org-html-head-include-scripts . nil))
+
+  ;; active Babel languages
+  (require 'ob-R)
+  (require 'ob-latex)
+  (add-to-list 'org-babel-noweb-error-langs "latex")
+
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (string-match "^\\(R\\|emacs-lisp\\)$" lang)))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
+  (setq org-file-apps
+        '((auto-mode . emacs)
+          ("\\.mm\\'" . default)
+          ("\\.x?html?\\'" . default)
+          ("\\.pdf\\'" . "open -a Preview %s")
+          ;; ("\\.pdf\\'" . "evince %s")
+          ))
+  ;; Do not center latex images by default
+  (setq org-latex-images-centered nil)
+  ;; Use texi2dvi to compile latex files
+  (setq org-latex-pdf-process (quote ("texi2dvi -p -b -V %f"))))
