@@ -214,3 +214,46 @@
   (setq TeX-file-extensions
         '("Snw" "Rnw" "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
   )
+
+;; ESS
+(use-package ess-site
+  :ensure ess
+  :defer t
+  :commands (R ess-version)
+  :mode (("\\.R\\'" . R-mode)
+         ("\\.[RS]nw\\'" . Rnw-mode))
+  :config
+  (ess-toggle-underscore nil)
+  (setq ess-use-ido t)
+  (setq ess-ask-for-ess-directory nil)
+  (setq ess-local-process-name "R")
+  (setq ess-help-own-frame 'one)
+  ;; (setq ess-swv-processor "knitr")  
+
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (ess-set-style 'GNU 'quiet)
+              ;; Because
+              ;;                                 DEF GNU BSD K&R C++
+              ;; ess-indent-level                  2   2   8   5   4
+              ;; ess-continued-statement-offset    2   2   8   5   4
+              ;; ess-brace-offset                  0   0  -8  -5  -4
+              ;; ess-arg-function-offset           2   4   0   0   0
+              ;; ess-expression-offset             4   2   8   5   4
+              ;; ess-else-offset                   0   0   0   0   0
+              ;; ess-close-brace-offset            0   0   0   0   0
+              (local-set-key [(shift return)] 'my-ess-eval)
+              (add-hook 'local-write-file-hooks
+                        (lambda ()
+                          (ess-nuke-trailing-whitespace)))))
+
+  (add-hook 'inferior-ess-mode-hook
+            '(lambda()
+               (setq comint-scroll-to-bottom-on-input t)
+               (setq comint-scroll-to-bottom-on-output t)
+               (setq comint-move-point-for-output t)
+               (local-set-key [C-up] 'comint-previous-input)
+               (local-set-key [C-down] 'comint-next-input)))
+
+  (add-hook 'Rnw-mode-hook '(lambda()
+               (local-set-key [(shift return)] 'my-ess-eval))))
