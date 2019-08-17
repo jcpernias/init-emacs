@@ -164,3 +164,53 @@
   (setq org-latex-images-centered nil)
   ;; Use texi2dvi to compile latex files
   (setq org-latex-pdf-process (quote ("texi2dvi -p -b -V %f"))))
+
+;; RefTeX
+(use-package reftex
+  :commands (reftex-mode turn-on-reftex)
+  :config
+  (setq reftex-enable-partial-scans t)
+  (setq reftex-save-parse-info t)
+  (setq reftex-use-multiple-selection-buffers t)
+
+  ;; Make TeX and RefTex aware of Snw and Rnw files
+  (setq reftex-file-extensions
+        '(("Snw" "Rnw" "nw" "tex" ".tex" ".ltx") ("bib" ".bib")))
+  (setq reftex-plug-into-AUCTeX t))
+
+;; AUCTeX
+(use-package tex-site
+  :defer t
+  :ensure auctex
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+  (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
+
+  (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-bib-cite)
+  (setq TeX-PDF-mode t)
+  (setq ess-swv-plug-into-AUCTeX-p t)
+
+  (setq TeX-auto-global "~/local/var/auctex/")
+  (setq TeX-auto-local ".Auto/")
+  (setq TeX-electric-sub-and-superscript t)
+
+  ;; Default pdf viewer
+  (setq TeX-view-program-list
+        '(("Preview" "open -a Preview %o")))
+  (setq TeX-view-program-selection '((output-pdf "Preview")))
+
+  ;; Turn on source correlation
+  (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+  (setq TeX-source-correlate-start-server t)
+
+  ;; Make TeX and RefTex aware of Snw and Rnw files
+  (setq TeX-file-extensions
+        '("Snw" "Rnw" "nw" "tex" "sty" "cls" "ltx" "texi" "texinfo"))
+  )
