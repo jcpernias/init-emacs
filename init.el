@@ -100,3 +100,18 @@
   :ensure t
   :config
   (load-theme 'hc-zenburn t t))
+
+
+;; Magit
+(use-package magit
+  :ensure t
+  :bind (("C-c g" . magit-status)
+         ("C-c C-g" . magit-dispatch-popup))
+  :config
+  (add-to-list 'magit-no-confirm 'stage-all-changes)
+  (setq magit-push-always-verify nil)
+  ;; Disable diff before commit
+  (setq vc-handled-backends (delq 'Git vc-handled-backends))
+  ;; Disable VC for Git
+  (setq vc-handled-backends (delq 'Git vc-handled-backends))
+  (global-magit-file-mode))
