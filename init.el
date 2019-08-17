@@ -52,6 +52,12 @@
   "Kill up to, but not including ARGth occurrence of CHAR." t)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
+
+;; shell
+(setq explicit-shell-file-name "bash")
+
+
+
 ;; set up the Emacs package system
 ;; (see http://emacs.stackexchange.com/a/5888)	 
 (require 'package)
