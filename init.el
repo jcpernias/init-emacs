@@ -57,6 +57,8 @@
 (setq explicit-shell-file-name "bash")
 
 
+;; Workaround for a bug in Emacs: https://debbugs.gnu.org/34341
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; set up the Emacs package system
 ;; (see http://emacs.stackexchange.com/a/5888)	 
