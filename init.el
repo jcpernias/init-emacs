@@ -155,6 +155,26 @@
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
 
+
+;; Flyspell
+
+;; bind context menu to mouse-3:
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+
+;; Add some useful keybindings:
+(global-set-key (kbd "<f8>") 'flyspell-mode)
+(global-set-key (kbd "M-<f8>") 'flyspell-buffer)
+
+;; ivy interface for flyspell-correct package
+(use-package flyspell-correct-ivy
+  :ensure t
+  :bind ("C-+" . flyspell-correct-wrapper)
+  :init
+  (setq flyspell-correct-interface #'flyspell-correct-ivy))
+
 ;; Magit
 (use-package magit
   :ensure t
