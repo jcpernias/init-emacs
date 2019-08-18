@@ -31,6 +31,8 @@
 ;; Add a newline at the end of files if there is not already one there
 (setq require-final-newline t)
 
+;; Align your code in a pretty way.
+(global-set-key (kbd "C-x \\") 'align-regexp) 
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
