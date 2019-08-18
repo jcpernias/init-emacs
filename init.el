@@ -99,6 +99,16 @@
     (add-to-list 'exec-path-from-shell-variables "TEXMFHOME")
     (exec-path-from-shell-initialize)))
 
+;; use system trash
+
+(when (eq system-type 'darwin)
+  (use-package osx-trash
+    :ensure t
+    :config
+    (osx-trash-setup)))
+(setq delete-by-moving-to-trash t)
+
+
 
 ;; Load hc-zenburn-theme, a higher contrast version
 ;; of the zenburn theme.
