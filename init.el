@@ -109,6 +109,16 @@
 (use-package counsel
   :ensure t
   :after ivy
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-x l" . counsel-locate)
+         ("C-c c" . counsel-compile)
+	 ("C-h f" . counsel-describe-function)
+	 ("C-h v" . counsel-describe-variable)
+	 ("C-h l" . counsel-find-library)
+	 ("C-h i" . counsel-info-lookup-symbol)
+	 ("C-h u" . counsel-unicode-char)
+	 ("C-x B" . ivy-switch-buffer-other-window))
   :config (counsel-mode))
 
 (use-package ivy
@@ -116,11 +126,16 @@
   :defer 0.1
   :diminish
   :bind (("C-c C-r" . ivy-resume)
-         ("C-x B" . ivy-switch-buffer-other-window))
+         ("C-x B" . ivy-switch-buffer-other-window)
+	 ("C-x B" . ivy-switch-buffer-other-window)
+	 ("C-x B" . ivy-switch-buffer-other-window))
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
-  :config (ivy-mode))
+  :init
+  (setq ivy-use-selectable-prompt t)
+  :config
+  (ivy-mode))
 
 (use-package ivy-rich
   :ensure t
