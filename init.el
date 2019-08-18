@@ -28,6 +28,9 @@
   (run-with-timer 0.1 nil #'invert-face 'mode-line))
 
 
+;; Add a newline at the end of files if there is not already one there
+(setq require-final-newline t)
+
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
