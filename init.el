@@ -39,6 +39,10 @@
   (global-unset-key (kbd "C-z"))
   (global-unset-key (kbd "C-x C-z")))
 
+
+;; Use visual line mode in text buffers
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
       (expand-file-name (concat user-emacs-directory "custom.el")))
