@@ -43,6 +43,12 @@
 ;; Use visual line mode in text buffers
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+;; Do not insert tabs
+(setq-default indent-tabs-mode nil)
+
+;; Tab stops every 4 columns
+(setq default-tab-width 4)
+
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
       (expand-file-name (concat user-emacs-directory "custom.el")))
