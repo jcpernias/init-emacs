@@ -34,6 +34,11 @@
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp) 
 
+;; Disable C-z in graphical environments
+(when (display-graphic-p)
+  (global-unset-key (kbd "C-z"))
+  (global-unset-key (kbd "C-x C-z")))
+
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
       (expand-file-name (concat user-emacs-directory "custom.el")))
