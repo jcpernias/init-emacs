@@ -52,6 +52,17 @@
 ;; Inserted text replaces the selected region
 (delete-selection-mode 1)
 
+;; Using the clipboard
+(setq select-enable-clipboard t
+      x-select-enable-clipboard-manager t
+      select-enable-primary t
+      save-interprogram-paste-before-kill t)
+
+;; Mouse-2 does not move point; it inserts the text at
+;; point, regardless of where you clicked or even which
+;; of the frame’s windows you clicked on
+(setq mouse-yank-at-point t)
+
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
       (expand-file-name (concat user-emacs-directory "custom.el")))
