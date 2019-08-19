@@ -49,6 +49,9 @@
 ;; Tab stops every 4 columns
 (setq default-tab-width 4)
 
+;; Inserted text replaces the selected region
+(delete-selection-mode 1)
+
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
       (expand-file-name (concat user-emacs-directory "custom.el")))
