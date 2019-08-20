@@ -152,7 +152,7 @@
 
 (use-package counsel
   :ensure t
-  :after ivy
+  :after swiper
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x l" . counsel-locate)
@@ -162,6 +162,8 @@
 	 ("C-h l" . counsel-find-library)
 	 ("C-h i" . counsel-info-lookup-symbol)
 	 ("C-h u" . counsel-unicode-char)
+         ("C-s" . counsel-grep-or-swiper)
+         ("C-r" . counsel-grep-or-swiper-backward)
 	 ("C-x B" . ivy-switch-buffer-other-window))
   :config (counsel-mode))
 
@@ -194,8 +196,7 @@
 (use-package swiper
   :ensure t
   :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+  :bind ())
 
 
 ;; Flyspell
