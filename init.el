@@ -440,3 +440,23 @@
      ;; Set dired-x buffer-local variables here.
      (dired-omit-mode 1)))
   )
+
+
+;; company is a text completion framework for Emacs.
+(use-package company
+  :ensure t)
+
+;; abbrev mode
+(use-package abbrev
+  :diminish abbrev-mode
+  :init
+  (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
+  (setq save-abbrevs t)
+  :config
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file)
+    (write-region "" nil abbrev-file-name)))
+
+;; flycheck
+(use-package flycheck
+  :ensure t)
