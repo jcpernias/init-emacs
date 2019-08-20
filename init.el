@@ -419,3 +419,24 @@
 
   (add-hook 'Rnw-mode-hook '(lambda()
                (local-set-key [(shift return)] 'my-ess-eval))))
+
+;; Dired-x
+(use-package dired-x
+  :bind ("C-x C-j" . dired-jump)
+  :init
+  (add-hook
+   'dired-load-hook
+   (lambda ()
+     (load "dired-x")
+     ;; Set dired-x global variables here.  For example:
+     ;; (setq dired-guess-shell-gnutar "gtar")
+     (setq dired-x-hands-off-my-keys nil)
+     (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.[^.]")
+     (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "open")))
+     ))
+  (add-hook
+   'dired-mode-hook
+   (lambda ()
+     ;; Set dired-x buffer-local variables here.
+     (dired-omit-mode 1)))
+  )
