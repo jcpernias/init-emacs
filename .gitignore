@@ -1,4 +1,5 @@
-custom.el
-elpa
-transient
-recentf
+/custom.el
+/elpa
+/transient
+/recentf
+/bookmarks
