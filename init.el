@@ -215,6 +215,8 @@
       try-complete-lisp-symbol-partially
       try-complete-lisp-symbol))
 
+;; apropos
+(setq apropos-do-all t)
 
 ;; Flyspell
 
