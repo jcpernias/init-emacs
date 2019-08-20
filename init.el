@@ -224,6 +224,11 @@
   :init
   (setq uniquify-buffer-name-style 'forward))
 
+;; save-place
+(save-place-mode 1)
+(setq save-place-forget-unreadable-files nil)
+
+
 ;; Flyspell
 
 ;; bind context menu to mouse-3:
