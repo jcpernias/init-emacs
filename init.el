@@ -199,6 +199,13 @@
   :bind ())
 
 
+;; Compile
+(setq compilation-scroll-output t)
+;; C-c p is bound to counsel-compile
+;; (global-set-key (kbd "C-c p") 'compile)
+(global-set-key (kbd "C-c r") 'recompile)
+(global-set-key (kbd "C-c k") 'kill-compilation)
+
 ;; Flyspell
 
 ;; bind context menu to mouse-3:
