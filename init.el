@@ -156,7 +156,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x l" . counsel-locate)
-         ("C-c c" . counsel-compile)
+         ("C-c p" . counsel-compile)
 	 ("C-h f" . counsel-describe-function)
 	 ("C-h v" . counsel-describe-variable)
 	 ("C-h l" . counsel-find-library)
