@@ -218,6 +218,12 @@
 ;; apropos
 (setq apropos-do-all t)
 
+;; Append the directory names when visiting two files
+;; with the same name
+(use-package uniquify
+  :init
+  (setq uniquify-buffer-name-style 'forward))
+
 ;; Flyspell
 
 ;; bind context menu to mouse-3:
