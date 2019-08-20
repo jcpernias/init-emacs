@@ -228,6 +228,10 @@
 (save-place-mode 1)
 (setq save-place-forget-unreadable-files nil)
 
+;; ediff
+(setq ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally
+      ediff-diff-options "-w")
 
 ;; Flyspell
 
