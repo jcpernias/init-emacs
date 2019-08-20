@@ -250,6 +250,18 @@
   (setq org-export-backends '(ascii html md beamer))
 
   :config
+  ;; Org directory
+  (let ((dir "~/.org"))
+    (make-directory dir :parents)
+    (setq org-directory dir))
+
+  ;; Org notes file
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+
+  ;; Org agenda file list
+  (setq org-agenda-files (concat org-directory "/agenda-files"))
+
+
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-list-allow-alphabetical t)
