@@ -460,3 +460,16 @@
 ;; flycheck
 (use-package flycheck
   :ensure t)
+
+
+;; restart emacs
+
+;; With a single universal-argument (C-u) Emacs is restarted with
+;; --debug-init flag; with two universal-argument Emacs is restarted
+;; with -Q flag; with three universal-argument the user is prompted
+;; for the arguments
+(use-package restart-emacs
+  :ensure t
+  :bind ("C-c C-z" . restart-emacs))
+
+
