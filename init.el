@@ -31,6 +31,16 @@
 ;; Add a newline at the end of files if there is not already one there
 (setq require-final-newline t)
 
+;; mac key bindings
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'super)
+  (setq mac-right-option-modifier 'none)
+  (setq mac-command-modifier 'meta))
+
+;; another binding for just-one-space
+(global-set-key (kbd "s-SPC") 'just-one-space)
+
+
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp) 
 
