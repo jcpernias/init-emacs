@@ -1,3 +1,13 @@
+;;; Main init file
+
+(add-to-list 'load-path (concat user-emacs-directory "jcp-init"))
+
+(require 'base)
+(require 'theme)
+(require 'extensions)
+(require 'functions)
+(require 'global-keys)
+
 ;; Disable the scrollbar, the toolbar and the menu bar
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
