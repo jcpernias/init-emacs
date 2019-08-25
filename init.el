@@ -33,8 +33,8 @@
 
 ;; mac key bindings
 (when (eq system-type 'darwin)
-  ;; (setq mac-function-modifier 'super)
-  ;; (setq mac-right-option-modifier 'none)
+  (setq mac-function-modifier 'super)
+  (setq mac-option-modifier 'none)
   (setq mac-command-modifier 'meta))
 
 ;; another binding for just-one-space
