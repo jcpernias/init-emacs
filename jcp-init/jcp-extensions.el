@@ -29,6 +29,11 @@
   :config
   (load-theme 'hc-zenburn t t))
 
+(use-package tango-plus-theme
+  :defer t)
+
+(use-package solarized-theme
+  :defer t)
 
 (use-package diminish
   :config
