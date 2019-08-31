@@ -18,4 +18,7 @@
     (osx-trash-setup)))
 (setq delete-by-moving-to-trash t)
 
+;; unset keybinding for printing
+(global-unset-key (kbd "s-p"))
+
 (provide 'jcp-darwin)
