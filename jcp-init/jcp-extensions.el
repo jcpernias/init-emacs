@@ -107,13 +107,6 @@
   :config
   (window-numbering-mode))
 
-;; move between windows with the arrow keys
-(use-package windmove
-  :config
-  (windmove-default-keybindings 'hyper)
-  ;; wrap around at edges
-  (setq windmove-wrap-around t))
-
 ;; undo tree mode
 (use-package undo-tree
   :config
