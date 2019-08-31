@@ -23,69 +23,25 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Append the directory names when visiting two files
-;; with the same name
-(use-package uniquify
-  :ensure nil
-  :init
-  (setq uniquify-buffer-name-style 'forward))
-
-
-;; macOS: Set environment variables as they are set in the shell
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (when (memq window-system '(mac ns))
-    (add-to-list 'exec-path-from-shell-variables "TEXMFHOME")
-    (exec-path-from-shell-initialize)))
-
-;; use system trash
-
-(when (eq system-type 'darwin)
-  (use-package osx-trash
-    :ensure t
-    :config
-    (osx-trash-setup)))
-(setq delete-by-moving-to-trash t)
-
-
-
 ;; Load hc-zenburn-theme, a higher contrast version
 ;; of the zenburn theme.
-
 (use-package hc-zenburn-theme
-  :ensure t
   :config
   (load-theme 'hc-zenburn t t))
 
 
-;; Ivy: see https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/?utm_source=share&utm_medium=web2x
+(use-package diminish
+  :config
+  (eval-after-load "abbrev" '(diminish 'abbrev-mode "Abv")))
 
+;; Ivy: see https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/?utm_source=share&utm_medium=web2x
 (use-package counsel
-  :ensure t
   :after swiper
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-x l" . counsel-locate)
-         ("C-c p" . counsel-compile)
-	 ("C-h f" . counsel-describe-function)
-	 ("C-h v" . counsel-describe-variable)
-	 ("C-h l" . counsel-find-library)
-	 ("C-h i" . counsel-info-lookup-symbol)
-	 ("C-h u" . counsel-unicode-char)
-         ("C-s" . counsel-grep-or-swiper)
-         ("C-r" . counsel-grep-or-swiper-backward)
-	 ("C-x B" . ivy-switch-buffer-other-window))
   :config (counsel-mode))
 
 (use-package ivy
-  :ensure t
   :defer 0.1
   :diminish
-  :bind (("C-c C-r" . ivy-resume)
-         ("C-x B" . ivy-switch-buffer-other-window)
-	 ("C-x B" . ivy-switch-buffer-other-window)
-	 ("C-x B" . ivy-switch-buffer-other-window))
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
@@ -95,7 +51,6 @@
   (ivy-mode))
 
 (use-package ivy-rich
-  :ensure t
   :after counsel
   :init
   (setq ivy-virtual-abbreviate 'full
@@ -105,100 +60,98 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package swiper
-  :ensure t
   :after ivy)
 
-;; Dired-x
-(use-package dired-x
-  :ensure nil
-  :bind ("C-x C-j" . dired-jump)
-  :init
-  (add-hook
-   'dired-load-hook
-   (lambda ()
-     (load "dired-x")
-     ;; Set dired-x global variables here.  For example:
-     ;; (setq dired-guess-shell-gnutar "gtar")
-     (setq dired-x-hands-off-my-keys nil)
-     (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.[^.]")
-     (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "open")))
-     ))
-  (add-hook
-   'dired-mode-hook
-   (lambda ()
-     ;; Set dired-x buffer-local variables here.
-     (dired-omit-mode 1)))
-  )
+;; projectile
+(use-package projectile
+  :config
+  (setq projectile-completion-system 'ivy)
+  (projectile-global-mode 1))
 
+(use-package counsel-projectile
+  :config
+  ;;(setq projectile-completion-system 'ivy)
+  (counsel-projectile-mode))
+
+
+
+;; icons
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
+;; dashboard
+(use-package page-break-lines)
+(use-package dashboard
+  :init
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+
+  :config
+  (dashboard-setup-startup-hook))
+
+;; which key
+(use-package which-key
+  :config
+  (which-key-mode 1))
+
+;; move around the visible buffer
+(use-package avy
+  :config
+  (avy-setup-default))
+
+;; assign number to windows and use M-1 to M-0 to navigate
+(use-package window-numbering
+  :config
+  (window-numbering-mode))
+
+;; move between windows with the arrow keys
+(use-package windmove
+  :config
+  (windmove-default-keybindings 'hyper)
+  ;; wrap around at edges
+  (setq windmove-wrap-around t))
+
+;; undo tree mode
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode 1))
+
+;; multiple cursors
+(use-package multiple-cursors)
 
 ;; company is a text completion framework for Emacs.
-(use-package company
-  :ensure t)
-
-;; abbrev mode
-(use-package abbrev
-  :ensure nil
-  :diminish abbrev-mode
-  :init
-  (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
-  (setq save-abbrevs t)
-  :config
-  (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file)
-    (write-region "" nil abbrev-file-name)))
+(use-package company)
 
 ;; flycheck
-(use-package flycheck
-  :ensure t)
-
-;; Flyspell
-
-;; bind context menu to mouse-3:
-(eval-after-load "flyspell"
-  '(progn
-     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
-     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
-
-;; Add some useful keybindings:
-(global-set-key (kbd "<f8>") 'flyspell-mode)
-(global-set-key (kbd "M-<f8>") 'flyspell-buffer)
+(use-package flycheck)
 
 ;; ivy interface for flyspell-correct package
 (use-package flyspell-correct-ivy
-  :ensure t
-  :bind ("C-+" . flyspell-correct-wrapper)
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
 ;; Magit
 (use-package magit
-  :ensure t
-  :bind (("C-c g" . magit-status)
-         ("C-c C-g" . magit-dispatch-popup))
   :config
   (add-to-list 'magit-no-confirm 'stage-all-changes)
   (setq magit-push-always-verify nil)
   ;; Disable diff before commit
-  (setq vc-handled-backends (delq 'Git vc-handled-backends))
-  ;; Disable VC for Git
   (setq vc-handled-backends (delq 'Git vc-handled-backends))
   (global-magit-file-mode))
 
 ;; htmlize exports the contents of an Emacs buffer to HTML
 ;; preserving display properties such as colors, fonts, underlining,
 ;; etc.
-(use-package htmlize
-  :ensure t)
+(use-package htmlize)
 
 ;; Org mode
 (use-package org
   :ensure org-plus-contrib
   :mode ("\\.org$" . org-mode)
   :init
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c b") 'org-switchb)
   (setq org-export-backends '(ascii html md beamer))
 
   :config
@@ -214,10 +167,10 @@
   (setq org-agenda-files (concat org-directory "/agenda-files"))
 
 
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
-  (setq org-list-allow-alphabetical t)
-  (setq org-use-speed-commands t)
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-list-allow-alphabetical t
+        org-use-speed-commands t)
 
   ;; Htmlize with css. See the documentation of this variable:
   (setq org-html-htmlize-output-type 'css)
@@ -262,18 +215,16 @@
 (use-package tex-site
   :defer t
   :ensure auctex
+  :hook
+  (((LaTeX-mode latex-mode) . turn-on-reftex)
+   (LaTeX-mode . auto-fill-mode)
+   (LaTeX-mode . visual-line-mode)
+   (LaTeX-mode . LaTeX-math-mode)
+   (LaTeX-mode . turn-on-bib-cite))
   :config
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
-
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
-  (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
-
-  (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
-  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (add-hook 'LaTeX-mode-hook 'turn-on-bib-cite)
   (setq TeX-PDF-mode t)
   (setq ess-swv-plug-into-AUCTeX-p t)
 
@@ -304,7 +255,6 @@
          ("\\.[RS]nw\\'" . Rnw-mode))
   :config
   (ess-toggle-underscore nil)
-  (setq ess-use-ido t)
   (setq ess-ask-for-ess-directory nil)
   (setq ess-local-process-name "R")
   (setq ess-help-own-frame 'one)
@@ -338,18 +288,12 @@
   (add-hook 'Rnw-mode-hook '(lambda()
                (local-set-key [(shift return)] 'my-ess-eval))))
 
-
-
-
 ;; restart emacs
 
 ;; With a single universal-argument (C-u) Emacs is restarted with
 ;; --debug-init flag; with two universal-argument Emacs is restarted
 ;; with -Q flag; with three universal-argument the user is prompted
 ;; for the arguments
-(use-package restart-emacs
-  :ensure t
-  :bind ("C-c C-z" . restart-emacs))
-
+(use-package restart-emacs)
 
 (provide 'jcp-extensions)

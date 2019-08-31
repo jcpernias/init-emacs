@@ -6,6 +6,4 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (save-excursion (backward-word 1) (point)) (point)))))
 
-
-
 (provide 'jcp-functions)

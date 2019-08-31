@@ -57,6 +57,32 @@
 ;; Fringes
 (setq fringes-outside-margins t)
 
+;; Append the directory names when visiting two files
+;; with the same name
+(setq uniquify-buffer-name-style 'forward)
+
+;; Dired-x
+(add-hook
+ 'dired-load-hook
+ (lambda ()
+   (load "dired-x")
+   ;; Set dired-x global variables here.  For example:
+   ;; (setq dired-guess-shell-gnutar "gtar")
+   (setq dired-x-hands-off-my-keys nil)
+   (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.[^.]")
+   (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "open")))))
+(add-hook
+ 'dired-mode-hook
+ (lambda ()
+   ;; Set dired-x buffer-local variables here.
+   (dired-omit-mode 1)))
+
+(autoload 'dired-jump "dired-x"
+  "Jump to Dired buffer corresponding to current buffer." t)
+
+(autoload 'dired-jump-other-window "dired-x"
+  "Like \\[dired-jump] (dired-jump) but in other window." t)
+
 ;; Using the clipboard
 (setq select-enable-clipboard t
       x-select-enable-clipboard-manager t
@@ -67,6 +93,16 @@
 ;; point, regardless of where you clicked or even which
 ;; of the frame’s windows you clicked on
 (setq mouse-yank-at-point t)
+
+;; bind flyspell context menu to mouse-3:
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+
+;; abbrevs
+(setq save-abbrevs t)
+
 
 ;; Do not clutter init.el with customize settings:
 (setq custom-file
@@ -115,5 +151,7 @@
       ediff-split-window-function 'split-window-horizontally
       ediff-diff-options "-w")
 
+;; recent files
+(recentf-mode 1)
 
 (provide 'jcp-base)
