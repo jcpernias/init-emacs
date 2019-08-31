@@ -133,6 +133,13 @@
   :init
   (setq flyspell-correct-interface #'flyspell-correct-ivy))
 
+;; yasnnipet
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets)
+
 ;; Magit
 (use-package magit
   :config
