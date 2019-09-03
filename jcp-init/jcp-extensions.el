@@ -203,6 +203,11 @@
   ;; Use texi2dvi to compile latex files
   (setq org-latex-pdf-process (quote ("texi2dvi -p -b -V %f"))))
 
+(use-package org-bullets
+  :ensure t
+  :hook
+  (org-mode . org-bullets-mode))
+
 ;; RefTeX
 (use-package reftex
   :commands (reftex-mode turn-on-reftex)
