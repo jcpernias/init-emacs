@@ -94,6 +94,9 @@
 ;; of the frame’s windows you clicked on
 (setq mouse-yank-at-point t)
 
+;; Use aspell
+(setq ispell-program-name "aspell")
+
 ;; bind flyspell context menu to mouse-3:
 (eval-after-load "flyspell"
   '(progn
