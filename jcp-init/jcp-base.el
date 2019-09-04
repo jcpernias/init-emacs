@@ -61,6 +61,12 @@
 ;; with the same name
 (setq uniquify-buffer-name-style 'forward)
 
+;; case insensitive sort in dired
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program nil)
+(setq ls-lisp-ignore-case 't)
+(setq ls-lisp-use-string-collate nil)
+
 ;; Dired-x
 (add-hook
  'dired-load-hook
