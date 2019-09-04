@@ -155,6 +155,6 @@
       ediff-diff-options "-w")
 
 ;; recent files
-(recentf-mode 1)
+(add-hook 'after-init-hook 'recentf-mode)
 
 (provide 'jcp-base)
