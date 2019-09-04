@@ -35,18 +35,25 @@
 (use-package solarized-theme
   :defer t)
 
-(use-package diminish
+(use-package delight
   :config
-  (eval-after-load "abbrev" '(diminish 'abbrev-mode "Abv")))
+  (delight '((abbrev-mode " Abv" abbrev)
+             (eldoc-mode nil "eldoc")
+             (overwrite-mode " Ov" t)
+             (flyspell-mode " Spell" flyspell)
+             (auto-revert-mode nil autorevert)
+             (lisp-interaction-mode "li" :major)
+             (emacs-lisp-mode "el" :major))))
 
 ;; Ivy: see https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/?utm_source=share&utm_medium=web2x
 (use-package counsel
+  :delight
   :after swiper
   :config (counsel-mode))
 
 (use-package ivy
   :defer 0.1
-  :diminish
+  :delight
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-use-virtual-buffers t)
@@ -69,6 +76,7 @@
 
 ;; projectile
 (use-package projectile
+  :delight '(:eval (format " [%s]" (projectile-project-name)))
   :config
   (setq projectile-completion-system 'ivy)
   (projectile-global-mode 1))
@@ -78,27 +86,9 @@
   ;;(setq projectile-completion-system 'ivy)
   (counsel-projectile-mode))
 
-
-
-;; icons
-(use-package all-the-icons)
-(use-package all-the-icons-dired
-  :hook
-  (dired-mode . all-the-icons-dired-mode))
-
-;; dashboard
-(use-package page-break-lines)
-(use-package dashboard
-  :init
-  (setq dashboard-startup-banner 'logo)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-
-  :config
-  (dashboard-setup-startup-hook))
-
 ;; which key
 (use-package which-key
+  :delight
   :config
   (which-key-mode 1))
 
@@ -114,6 +104,7 @@
 
 ;; undo tree mode
 (use-package undo-tree
+  :delight
   :config
   (global-undo-tree-mode 1))
 
@@ -133,6 +124,7 @@
 
 ;; yasnnipet
 (use-package yasnippet
+  :delight (yas-minor-mode " Y")
   :config
   (yas-global-mode 1))
 
