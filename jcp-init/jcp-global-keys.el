@@ -43,6 +43,9 @@
 ;; Dired-x
 (global-set-key (kbd "C-x C-j") 'dired-jump)
 (global-set-key (kbd "C-x 4 C-j") 'dired-jump-other-window)
+;; disable printig from dired
+(eval-after-load 'dired
+  '(define-key dired-mode-map "P" nil))
 
 ;; Flyspell
 (global-set-key (kbd "<f8>") 'flyspell-mode)
