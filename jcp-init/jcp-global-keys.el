@@ -36,7 +36,7 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 
-(global-set-key (kbd "C-c C-z") 'restart-emacs)
+(global-set-key (kbd "C-c r") 'restart-emacs)
 
 (global-set-key (kbd "M-/") 'hippie-expand)
 
@@ -47,6 +47,8 @@
 ;; Flyspell
 (global-set-key (kbd "<f8>") 'flyspell-mode)
 (global-set-key (kbd "M-<f8>") 'flyspell-buffer)
+(eval-after-load 'flyspell
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 ;; ivy, swiper, counsel
 (global-set-key (kbd "M-x") 'counsel-M-x)
