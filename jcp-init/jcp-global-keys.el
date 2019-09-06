@@ -72,8 +72,8 @@
 (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
 (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
 
-;; flyspell correct ivy
-(global-set-key (kbd "C-+") 'flyspell-correct-wrapper)
+;; flyspell
+(global-set-key (kbd "C-+") 'flyspell-correct-at-point)
 
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
