@@ -77,7 +77,7 @@
 
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
-(global-set-key (kbd "C-c C-g") 'magit-dispatch)
+;; (global-set-key (kbd "C-c C-g") 'magit-dispatch)
 
 ;; Org
 (global-set-key (kbd "C-c l") 'org-store-link)
