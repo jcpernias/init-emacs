@@ -77,12 +77,17 @@
 ;; projectile
 (use-package projectile
   :delight '(:eval (format " [%s]" (projectile-project-name)))
-  :config
+  :init
   (setq projectile-completion-system 'ivy)
+  (setq projectile-switch-project-action #'projectile-dired)
+  :config
   (projectile-global-mode 1))
 
 (use-package counsel-projectile
   :config
+  (counsel-projectile-modify-action
+   'counsel-projectile-switch-project-action
+   '((default counsel-projectile-switch-project-action-dired)))
   ;;(setq projectile-completion-system 'ivy)
   (counsel-projectile-mode))
 
