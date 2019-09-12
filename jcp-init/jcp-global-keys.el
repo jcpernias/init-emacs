@@ -85,5 +85,6 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c b") 'org-switchb)
 
+(global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
 
 (provide 'jcp-global-keys)

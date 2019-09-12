@@ -208,6 +208,13 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(use-package org-projectile
+  :config
+  (org-projectile-per-project)
+  (setq org-projectile-per-project-filepath "TODO.org")
+  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+  (push (org-projectile-project-todo-entry) org-capture-templates))
+
 ;; RefTeX
 (use-package reftex
   :commands (reftex-mode turn-on-reftex)
