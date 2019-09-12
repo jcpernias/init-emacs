@@ -179,6 +179,9 @@
   (add-to-list 'safe-local-variable-values
                '(org-html-head-include-scripts . nil))
 
+  ;; activate block snippets
+  (require 'org-tempo)
+
   ;; active Babel languages
   (require 'ob-R)
   (require 'ob-latex)
