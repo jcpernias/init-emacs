@@ -61,7 +61,7 @@
 (global-set-key (kbd "C-h f") 'counsel-describe-function)
 (global-set-key (kbd "C-h v") 'counsel-describe-variable)
 (global-set-key (kbd "C-h l") 'counsel-find-library)
-(global-set-key (kbd "C-h i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "C-h y") 'counsel-info-lookup-symbol)
 (global-set-key (kbd "C-h u") 'counsel-unicode-char)
 (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
 (global-set-key (kbd "C-r") 'counsel-grep-or-swiper-backward)
