@@ -215,6 +215,18 @@
   (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
   (push (org-projectile-project-todo-entry) org-capture-templates))
 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command
+              (concat
+               "/usr/local/bin/pandoc"
+               " --from=markdown --to=html"
+               " --standalone --mathjax --highlight-style=pygments")))
+
 ;; RefTeX
 (use-package reftex
   :commands (reftex-mode turn-on-reftex)
