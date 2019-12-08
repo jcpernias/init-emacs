@@ -135,7 +135,7 @@
 (setq column-number-mode t)
 
 ;; shell
-(setq explicit-shell-file-name "bash")
+(setq explicit-shell-file-name "zsh")
 
 ;; Compile
 (setq compilation-scroll-output t)
