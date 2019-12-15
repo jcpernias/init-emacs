@@ -325,4 +325,6 @@
 ;; for the arguments
 (use-package restart-emacs)
 
+(use-package json-mode)
+
 (provide 'jcp-extensions)
