@@ -130,6 +130,9 @@
 ;; Enable show-paren mode
 (show-paren-mode 1)
 
+;; electric pair mode
+(electric-pair-mode 1)
+
 ;; Line and column numbers in the modeline
 (setq line-number-mode t)
 (setq column-number-mode t)
