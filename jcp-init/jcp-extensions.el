@@ -325,6 +325,14 @@
 ;; for the arguments
 (use-package restart-emacs)
 
+;; JSON files
 (use-package json-mode)
+
+
+;; csv files
+;; CSV mode config
+(use-package csv-mode
+  :ensure t
+  :mode "\\.csv$")
 
 (provide 'jcp-extensions)
