@@ -201,7 +201,7 @@
   ;; Do not center latex images by default
   (setq org-latex-images-centered nil)
   ;; Use texi2dvi to compile latex files
-  (setq org-latex-pdf-process (quote ("texi2dvi -p -b -V %f"))))
+  (setq org-latex-pdf-process (quote ("LATEX=%latex texi2dvi -b -V %f"))))
 
 (use-package org-bullets
   :ensure t

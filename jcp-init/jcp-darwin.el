@@ -21,4 +21,6 @@
 ;; unset keybinding for printing
 (global-unset-key (kbd "s-p"))
 
+(setenv "LANG" "es_ES.UTF-8")
+
 (provide 'jcp-darwin)
