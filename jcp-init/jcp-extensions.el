@@ -325,6 +325,29 @@
 ;; for the arguments
 (use-package restart-emacs)
 
+
+;; web-mode
+(use-package emmet-mode
+  :ensure t
+  :hook web-mode)
+
+(use-package js2-mode
+  :ensure t
+  :hook (web-mode . js2-minor-mode))
+
+(use-package prettier-js
+  :ensure t)
+  ;; :hook (web-mode . prettier-js-mode))
+
+(use-package add-node-modules-path
+  :ensure t
+  :hook web-mode)
+
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html$" . web-mode)
+         ("\\.jsx?\\'" . web-mode)))
+
 ;; JSON files
 (use-package json-mode)
 
