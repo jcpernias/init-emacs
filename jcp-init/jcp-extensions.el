@@ -331,9 +331,13 @@
   :ensure t
   :hook web-mode)
 
-(use-package js2-mode
+(use-package rainbow-mode
   :ensure t
-  :hook (web-mode . js2-minor-mode))
+  :hook web-mode)
+
+(use-package js2-mode
+  :ensure t)
+  ;; :hook (web-mode . js2-minor-mode))
 
 (use-package prettier-js
   :ensure t)
