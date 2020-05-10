@@ -355,6 +355,13 @@
 ;; JSON files
 (use-package json-mode)
 
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.yml\\'"
+  :config
+  (add-hook 'yaml-mode-hook
+      '(lambda ()
+         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 ;; csv files
 ;; CSV mode config
