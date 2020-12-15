@@ -27,7 +27,7 @@
 ;; of the zenburn theme.
 (use-package hc-zenburn-theme
   :config
-  (load-theme 'hc-zenburn t t))
+  (load-theme 'hc-zenburn t))
 
 (use-package tango-plus-theme
   :defer t)
@@ -141,8 +141,8 @@
   (add-to-list 'magit-no-confirm 'stage-all-changes)
   (setq magit-push-always-verify nil)
   ;; Disable diff before commit
-  (setq vc-handled-backends (delq 'Git vc-handled-backends))
-  (global-magit-file-mode))
+  ;; (global-magit-file-mode)
+  (setq vc-handled-backends (delq 'Git vc-handled-backends)))
 
 ;; htmlize exports the contents of an Emacs buffer to HTML
 ;; preserving display properties such as colors, fonts, underlining,
