@@ -21,9 +21,26 @@
 (setq visible-bell nil
       ring-bell-function 'jcp/flash-mode-line)
 
-;; Set default font
-(set-face-attribute 'default nil
-                    :family "Source Code Pro" :height 150 :weight 'normal)
+;; Set default font and default frame dimensions
+(cond
+ ((string-equal system-name "Lola")
+  (progn
+    (set-face-attribute
+     'default nil
+     :family "Source Code Pro" :height 100 :weight 'normal)
+    (setq default-frame-alist
+          '((width . 85) (height . 40)
+            (vertical-scroll-bars . nil)
+            (horizontal-scroll-bars . nil)))))
+ (t
+  (progn
+    (set-face-attribute
+     'default nil
+     :family "Source Code Pro" :height 150 :weight 'normal)
+    (setq default-frame-alist
+          '((width . 90) (height . 52)
+            (vertical-scroll-bars . nil)
+            (horizontal-scroll-bars . nil))))))
 
 ;; Set default frame dimensions
 (setq default-frame-alist
