@@ -331,9 +331,13 @@
   :ensure t
   :hook web-mode)
 
-(use-package js2-mode
+(use-package rainbow-mode
   :ensure t
-  :hook (web-mode . js2-minor-mode))
+  :hook web-mode)
+
+(use-package js2-mode
+  :ensure t)
+  ;; :hook (web-mode . js2-minor-mode))
 
 (use-package prettier-js
   :ensure t)
@@ -351,6 +355,19 @@
 ;; JSON files
 (use-package json-mode)
 
+;; YAML
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.yml\\'"
+  :config
+  (add-hook 'yaml-mode-hook
+      '(lambda ()
+         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+
+;; Moodle Gift files
+(use-package gift-mode
+  :ensure t
+  :mode "\\.gift\\'")
 
 ;; csv files
 ;; CSV mode config
