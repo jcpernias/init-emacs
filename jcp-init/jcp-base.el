@@ -42,12 +42,6 @@
             (vertical-scroll-bars . nil)
             (horizontal-scroll-bars . nil))))))
 
-;; Set default frame dimensions
-(setq default-frame-alist
-      '((width . 90) (height . 52)
-	(vertical-scroll-bars . nil)
-	(horizontal-scroll-bars . nil)))
-
 ;; Add a newline at the end of files if there is not already one there
 (setq require-final-newline t)
 
