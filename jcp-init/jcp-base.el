@@ -100,7 +100,8 @@
    ;; (setq dired-guess-shell-gnutar "gtar")
    (setq dired-x-hands-off-my-keys nil)
    (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.[^.]")
-   (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "open")))))
+   (when (eq system-type 'darwin)
+     (setq dired-guess-shell-alist-user '(("\\.pdf\\'" "open -a Skim"))))))
 (add-hook
  'dired-mode-hook
  (lambda ()
@@ -162,7 +163,8 @@
 (setq column-number-mode t)
 
 ;; shell
-(setq explicit-shell-file-name "zsh")
+(when (eq system-type 'darwin)
+  (setq explicit-shell-file-name "zsh"))
 
 ;; Compile
 (setq compilation-scroll-output t)
