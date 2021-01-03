@@ -32,6 +32,19 @@
           '((width . 85) (height . 40)
             (vertical-scroll-bars . nil)
             (horizontal-scroll-bars . nil)))))
+ ((string-equal system-name "Victoria.local")
+  (progn
+    (set-face-attribute
+     'default nil
+     :family "Source Code Pro" :height 150 :weight 'normal)
+    (setq my-top (- (x-display-pixel-height) 1272)
+          my-left (/ (- (x-display-pixel-width) 1730) 2))
+    (add-to-list 'initial-frame-alist (cons 'top my-top))
+    (add-to-list 'initial-frame-alist (cons 'left my-left))
+    (setq default-frame-alist
+          '((width . 190) (height . 60)
+            (vertical-scroll-bars . nil)
+            (horizontal-scroll-bars . nil)))))
  (t
   (progn
     (set-face-attribute
