@@ -157,6 +157,11 @@
 
 ;; electric pair mode
 (electric-pair-mode 1)
+(add-function
+ :before-until electric-pair-inhibit-predicate
+ (lambda (c)
+   (and (eq major-mode 'org-mode)
+        (eq c ?<))))
 
 ;; Line and column numbers in the modeline
 (setq line-number-mode t)
