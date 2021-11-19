@@ -37,7 +37,7 @@
     (progn
       (set-face-attribute
        'default nil
-       :family "Source Code Pro" :height 150 :weight 'normal)
+       :family "Source Code Pro" :height 160 :weight 'normal)
       (setq my-top (- (x-display-pixel-height) 1272)
             my-left (/ (- (x-display-pixel-width) 1730) 2))
       (add-to-list 'initial-frame-alist (cons 'top my-top))
