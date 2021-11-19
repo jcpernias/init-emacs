@@ -22,38 +22,53 @@
       ring-bell-function 'jcp/flash-mode-line)
 
 ;; Set default font and default frame dimensions
-(cond
- ((string-equal system-name "Lola")
-  (progn
-    (set-face-attribute
-     'default nil
-     :family "Source Code Pro" :height 100 :weight 'normal)
-    (setq default-frame-alist
-          '((width . 85) (height . 40)
-            (vertical-scroll-bars . nil)
-            (horizontal-scroll-bars . nil)))))
- ((string-equal system-name "Victoria.local")
-  (progn
-    (set-face-attribute
-     'default nil
-     :family "Source Code Pro" :height 150 :weight 'normal)
-    (setq my-top (- (x-display-pixel-height) 1272)
-          my-left (/ (- (x-display-pixel-width) 1730) 2))
-    (add-to-list 'initial-frame-alist (cons 'top my-top))
-    (add-to-list 'initial-frame-alist (cons 'left my-left))
-    (setq default-frame-alist
-          '((width . 190) (height . 60)
-            (vertical-scroll-bars . nil)
-            (horizontal-scroll-bars . nil)))))
- (t
-  (progn
-    (set-face-attribute
-     'default nil
-     :family "Source Code Pro" :height 150 :weight 'normal)
-    (setq default-frame-alist
-          '((width . 90) (height . 52)
-            (vertical-scroll-bars . nil)
-            (horizontal-scroll-bars . nil))))))
+(let ((sname (system-name)))
+  (cond
+   ((string-equal sname "Lola")
+    (progn
+      (set-face-attribute
+       'default nil
+       :family "Source Code Pro" :height 100 :weight 'normal)
+      (setq default-frame-alist
+            '((width . 85) (height . 40)
+              (vertical-scroll-bars . nil)
+              (horizontal-scroll-bars . nil)))))
+   ((string-equal sname "Victoria.local")
+    (progn
+      (set-face-attribute
+       'default nil
+       :family "Source Code Pro" :height 150 :weight 'normal)
+      (setq my-top (- (x-display-pixel-height) 1272)
+            my-left (/ (- (x-display-pixel-width) 1730) 2))
+      (add-to-list 'initial-frame-alist (cons 'top my-top))
+      (add-to-list 'initial-frame-alist (cons 'left my-left))
+      (setq default-frame-alist
+            '((width . 190) (height . 60)
+              (vertical-scroll-bars . nil)
+              (horizontal-scroll-bars . nil)))))
+   ((string-equal sname "Duke.local")
+    (progn
+      (set-face-attribute
+       'default nil
+       :family "Source Code Pro" :height 150 :weight 'normal)
+      (setq my-top (- (x-display-pixel-height) 1020)
+            width (nth 3 (assq 'geometry (car (display-monitor-attributes-list))))
+            my-left (/ (-  width 1637) 2))
+      (add-to-list 'initial-frame-alist (cons 'top my-top))
+      (add-to-list 'initial-frame-alist (cons 'left my-left))
+      (setq default-frame-alist
+            '((width . 180) (height . 52)
+              (vertical-scroll-bars . nil)
+              (horizontal-scroll-bars . nil)))))
+   (t
+    (progn
+      (set-face-attribute
+       'default nil
+       :family "Source Code Pro" :height 150 :weight 'normal)
+      (setq default-frame-alist
+            '((width . 90) (height . 52)
+              (vertical-scroll-bars . nil)
+              (horizontal-scroll-bars . nil)))))))
 
 ;; Add a newline at the end of files if there is not already one there
 (setq require-final-newline t)
