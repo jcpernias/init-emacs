@@ -6,4 +6,10 @@
    (if mark-active (list (region-beginning) (region-end))
      (list (save-excursion (backward-word 1) (point)) (point)))))
 
+(defun number-of-cores ()
+  "Return the number of cores present in the system"
+  (when (eq system-type 'darwin)
+    (string-to-number
+     (car (process-lines "sysctl" "-n" "hw.physicalcpu")))))
+
 (provide 'jcp-functions)
