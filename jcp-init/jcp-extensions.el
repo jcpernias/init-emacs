@@ -218,14 +218,16 @@
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . gfm-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command
-              (concat
-               "/usr/local/bin/pandoc"
-               " --from=markdown --to=html"
-               " --standalone --mathjax --highlight-style=pygments")))
+  :mode (;; ("README\\.md\\'" . gfm-mode)
+         ;; ("\\.md\\'" . gfm-mode)
+         ("\\.markdown\\'" . gfm-mode))
+  :config
+  (setq markdown-asymmetric-header t)
+  (setq markdown-command
+        (concat
+         "/usr/local/bin/pandoc"
+         " --from=markdown --to=html"
+         " --standalone --mathjax --highlight-style=pygments")))
 
 ;; RefTeX
 (use-package reftex
@@ -283,25 +285,17 @@
 
   :init
   (setq ess-ask-for-ess-directory nil)
-  (setq ess-local-process-name "R")
   (setq ess-help-own-frame 'one)
+  ;; uses braces around code block language strings:
+  (setq markdown-code-block-braces t)
 
   :config
   (ess-toggle-underscore nil)
 
   (add-hook 'ess-mode-hook
             (lambda ()
-              (ess-set-style 'GNU 'quiet)
-              ;; Because
-              ;;                                 DEF GNU BSD K&R C++
-              ;; ess-indent-level                  2   2   8   5   4
-              ;; ess-continued-statement-offset    2   2   8   5   4
-              ;; ess-brace-offset                  0   0  -8  -5  -4
-              ;; ess-arg-function-offset           2   4   0   0   0
-              ;; ess-expression-offset             4   2   8   5   4
-              ;; ess-else-offset                   0   0   0   0   0
-              ;; ess-close-brace-offset            0   0   0   0   0
-              (local-set-key [(shift return)] 'my-ess-eval)
+              (ess-set-style 'Rstudio-)
+              ;; (local-set-key [(shift return)] 'my-ess-eval)
               (add-hook 'local-write-file-hooks
                         (lambda ()
                           (ess-nuke-trailing-whitespace)))))
@@ -323,8 +317,8 @@
 
 (use-package polymode
   :diminish (poly-org-mode
+             poly-gfm+r-mode
              poly-markdown-mode
-             poly-noweb+r-mode
              poly-noweb+r-mode
              poly-markdown+r-mode
              poly-rapport-mode
@@ -334,7 +328,7 @@
              poly-c++r-mode)
   :mode (("\\.[rR]md\\'" . poly-gfm+r-mode)
          ("\\.[RS]nw\\'" . poly-noweb+R-mode)
-         ("\\.md$" . poly-markdown-mode)
+         ("\\.md$" . poly-gfm-mode)
          ("\\.Rcpp$" . poly-r+c++-mode)
          ("\\.cppR$" . poly-c++r-mode))
   :init
