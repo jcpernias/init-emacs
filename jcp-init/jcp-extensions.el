@@ -223,6 +223,7 @@
          ("\\.markdown\\'" . gfm-mode))
   :config
   (setq markdown-asymmetric-header t)
+  (setq markdown-code-block-braces t)
   (setq markdown-command
         (concat
          "/usr/local/bin/pandoc"
