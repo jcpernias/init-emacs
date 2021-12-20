@@ -280,13 +280,12 @@
   :ensure ess
   :defer t
   :commands (R ess-version)
-  :mode (("\\.R\\'" . R-mode)
-         ("\\.[RS]nw\\'" . Rnw-mode))
+
   :init
   (setq ess-ask-for-ess-directory nil)
   (setq ess-local-process-name "R")
   (setq ess-help-own-frame 'one)
-  ;; (setq ess-swv-processor "knitr")
+
   :config
   (ess-toggle-underscore nil)
 
@@ -313,38 +312,34 @@
                (setq comint-scroll-to-bottom-on-output t)
                (setq comint-move-point-for-output t)
                (local-set-key [C-up] 'comint-previous-input)
-               (local-set-key [C-down] 'comint-next-input)))
-
-  (add-hook 'Rnw-mode-hook '(lambda()
-               (local-set-key [(shift return)] 'my-ess-eval))))
+               (local-set-key [C-down] 'comint-next-input))))
 
 
 (use-package poly-markdown
-       :ensure t)
+  :ensure t)
 
 (use-package poly-R
   :ensure t)
 
 (use-package polymode
-       :diminish (poly-org-mode
-              poly-markdown-mode
-              poly-noweb+r-mode
-              poly-noweb+r-mode
-              poly-markdown+r-mode
-              poly-rapport-mode
-              poly-html+r-mode
-              poly-brew+r-mode
-              poly-r+c++-mode
-              poly-c++r-mode)
-       :init
-       (require 'poly-R)
-       (require 'poly-markdown)
-       :config
-       (add-to-list 'auto-mode-alist '("\\.md$" . poly-markdown-mode))
-       (add-to-list 'auto-mode-alist '("\\.Rmd$" . poly-markdown+r-mode))
-       (add-to-list 'auto-mode-alist '("\\.Rcpp$" . poly-r+c++-mode))
-       (add-to-list 'auto-mode-alist '("\\.cppR$" . poly-c++r-mode))
-       )
+  :diminish (poly-org-mode
+             poly-markdown-mode
+             poly-noweb+r-mode
+             poly-noweb+r-mode
+             poly-markdown+r-mode
+             poly-rapport-mode
+             poly-html+r-mode
+             poly-brew+r-mode
+             poly-r+c++-mode
+             poly-c++r-mode)
+  :mode (("\\.[rR]md\\'" . poly-gfm+r-mode)
+         ("\\.[RS]nw\\'" . poly-noweb+R-mode)
+         ("\\.md$" . poly-markdown-mode)
+         ("\\.Rcpp$" . poly-r+c++-mode)
+         ("\\.cppR$" . poly-c++r-mode))
+  :init
+  (require 'poly-R)
+  (require 'poly-markdown))
 
 ;; restart emacs
 
