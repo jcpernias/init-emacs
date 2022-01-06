@@ -9,8 +9,7 @@
 ;; package repositories
 (setq package-archives
       '(("gnu"         . "https://elpa.gnu.org/packages/")
-	("melpa"       . "https://melpa.org/packages/")
-	("org"         . "http://orgmode.org/elpa/")))
+	("melpa"       . "https://melpa.org/packages/")))
 
 ;; Initialize Emacs package system:
 (unless package--initialized
@@ -151,7 +150,7 @@
 
 ;; Org mode
 (use-package org
-  :ensure org-plus-contrib
+  :ensure t
   :mode ("\\.org$" . org-mode)
   :init
   (setq org-export-backends '(ascii html md beamer))
