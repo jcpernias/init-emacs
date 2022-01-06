@@ -119,7 +119,9 @@
 (use-package company)
 
 ;; flycheck
-(use-package flycheck)
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;; ivy interface for flyspell-correct package
 (use-package flyspell-correct-ivy
@@ -334,6 +336,25 @@
   :init
   (require 'poly-R)
   (require 'poly-markdown))
+
+;; Python
+
+(setq python-shell-interpreter "python3")
+(setq python-shell-interpreter-args "-i")
+
+
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable)
+  (add-hook 'elpy-mode-hook 'flycheck-mode)
+  :config
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules)))
+
+;; (when (load "flycheck" t t)
+;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; restart emacs
 
