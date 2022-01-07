@@ -349,6 +349,7 @@
   :init
   (advice-add 'python-mode :before 'elpy-enable)
   (add-hook 'elpy-mode-hook 'flycheck-mode)
+  (setq elpy-rpc-python-command "/usr/local/bin/python3")
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules)))
 
