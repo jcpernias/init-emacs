@@ -1,13 +1,1 @@
-custom.el
-elpa
-elpy
-transient
-recentf
-bookmarks
-places
-abbrev_defs
-projectile-bookmarks.eld
-auto-save-list
-backups
-.DS_Store
-.mc-lists.el
+local.mk
