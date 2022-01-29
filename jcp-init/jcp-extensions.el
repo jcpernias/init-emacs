@@ -120,8 +120,8 @@
 
 ;; flycheck
 (use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+  :ensure t)
+;  :init (global-flycheck-mode))
 
 ;; ivy interface for flyspell-correct package
 (use-package flyspell-correct-ivy
