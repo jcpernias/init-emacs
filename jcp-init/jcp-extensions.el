@@ -350,8 +350,7 @@
   (advice-add 'python-mode :before 'elpy-enable)
   (add-hook 'elpy-mode-hook 'flycheck-mode)
   (setq elpy-rpc-python-command
-        (concat (substring (shell-command-to-string "brew --prefix") 0 -1)
-                 "/bin/python3"))
+        (concat (getenv "HOMEBREW_PREFIX") "/bin/python3"))
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules)))
 

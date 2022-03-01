@@ -8,6 +8,7 @@
   :config
   (when (memq window-system '(mac ns))
     (add-to-list 'exec-path-from-shell-variables "TEXMFHOME")
+    (add-to-list 'exec-path-from-shell-variables "HOMEBREW_PREFIX")
     (exec-path-from-shell-initialize)))
 
 ;; use system trash
