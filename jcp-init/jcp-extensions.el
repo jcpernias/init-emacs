@@ -263,6 +263,7 @@
 
   (setq TeX-auto-global "~/local/var/auctex/")
   (setq TeX-auto-local ".Auto/")
+  (setq TeX-style-private (expand-file-name "~/.emacs.d/auctex-styles"))
   (setq TeX-electric-sub-and-superscript t)
 
   ;; Default pdf viewer

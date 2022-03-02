@@ -8,6 +8,7 @@ dotemacsdir := $(HOME)/.emacs.d
 jcpinitdir := $(dotemacsdir)/jcp-init
 snippetsdir := $(dotemacsdir)/snippets
 orgsnippetsdir := $(snippetsdir)/org-mode
+auctexdir := $(dotemacsdir)/auctex-styles
 
 all_deps := \
 	$(dotemacsdir)/init.el \
@@ -17,7 +18,9 @@ all_deps := \
 	$(jcpinitdir)/jcp-functions.el \
 	$(jcpinitdir)/jcp-global-keys.el \
 	$(orgsnippetsdir)/equation \
-	$(orgsnippetsdir)/gather
+	$(orgsnippetsdir)/gather \
+	$(auctexdir)/elsarticle.el
+
 
 all: $(all_deps)
 
@@ -30,6 +33,9 @@ $(jcpinitdir)/%.el: ./jcp-init/%.el | $(jcpinitdir)
 $(orgsnippetsdir)/%: ./snippets/org-mode/% | $(orgsnippetsdir)
 	$(INSTALL) -m 0644 -T $< $@
 
+$(auctexdir)/%: ./auctex-styles/% | $(auctexdir)
+	$(INSTALL) -m 0644 -T $< $@
+
 $(dotemacsdir):
 	$(INSTALL) -m 0755 -d $@
 
@@ -37,6 +43,9 @@ $(jcpinitdir):
 	$(INSTALL) -m 0755 -d $@
 
 $(orgsnippetsdir):
+	$(INSTALL) -m 0755 -d $@
+
+$(auctexdir):
 	$(INSTALL) -m 0755 -d $@
 
 clean:
