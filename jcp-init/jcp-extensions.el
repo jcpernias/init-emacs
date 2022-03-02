@@ -110,7 +110,18 @@
 (use-package undo-tree
   :delight
   :config
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+  ;; Do not save text properties in undo history:
+  ;; see https://emacs.stackexchange.com/a/31130
+  (defun nadvice/undo-tree-ignore-text-properties (old-fun &rest args)
+    (dolist (item buffer-undo-list)
+      (and (consp item)
+           (stringp (car item))
+           (setcar item (substring-no-properties (car item)))))
+    (apply old-fun args))
+
+  (advice-add 'undo-list-transfer-to-tree :around
+              #'nadvice/undo-tree-ignore-text-properties))
 
 ;; multiple cursors
 (use-package multiple-cursors)
