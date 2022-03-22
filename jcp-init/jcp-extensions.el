@@ -277,6 +277,17 @@
   (setq TeX-style-private (expand-file-name "~/.emacs.d/auctex-styles"))
   (setq TeX-electric-sub-and-superscript t)
 
+  ;; Fontification of macros
+  (setq font-latex-match-reference-keywords
+        '(
+          ;; changes
+          ("added" "[{")
+          ("deleted" "[{")
+          ("replaced" "[{{")
+          ("comment" "[{")
+          ("highlight" "[{")
+          ))
+
   ;; Default pdf viewer
   (setq TeX-view-program-list
         '(("Preview" "open -a Preview %o")))
