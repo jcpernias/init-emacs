@@ -12,4 +12,9 @@
     (string-to-number
      (car (process-lines "sysctl" "-n" "hw.physicalcpu")))))
 
+(defun ensure-file (path)
+  "Create an empty file PATH if not exists yet"
+  (unless (file-exists-p path)
+    (make-empty-file path t)))
+
 (provide 'jcp-functions)

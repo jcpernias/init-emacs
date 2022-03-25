@@ -170,21 +170,29 @@
 
   :config
   ;; Org directory
-  (let ((dir "~/.org"))
+  (let ((dir "~/Documents/org"))
     (make-directory dir :parents)
     (setq org-directory dir))
 
   ;; Org notes file
   (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (ensure-file org-default-notes-file)
 
   ;; Org agenda file list
-  (setq org-agenda-files (concat org-directory "/agenda-files"))
+  (setq org-agenda-files
+        (mapcar (lambda (x) (concat org-directory x))
+                '("/work.org"
+                  "/teaching.org"
+                  "/home.org")))
 
+  (dolist (path org-agenda-files)
+    (ensure-file path))
 
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t
         org-list-allow-alphabetical t
-        org-use-speed-commands t)
+        org-use-speed-commands t
+        org-log-done t)
 
   ;; Htmlize with css. See the documentation of this variable:
   (setq org-html-htmlize-output-type 'css)
@@ -221,11 +229,17 @@
   (org-mode . org-bullets-mode))
 
 (use-package org-projectile
+  :ensure t
+  :bind (("C-c n p" . org-projectile-project-todo-completing-read))
   :config
-  (org-projectile-per-project)
-  (setq org-projectile-per-project-filepath "TODO.org")
-  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-  (push (org-projectile-project-todo-entry) org-capture-templates))
+  (progn
+    (setq org-projectile-projects-file
+          (concat org-directory "/projects.org"))
+    (ensure-file org-projectile-projects-file)
+    (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    (push (org-projectile-project-todo-entry) org-capture-templates))
+  )
+
 
 (use-package markdown-mode
   :ensure t
