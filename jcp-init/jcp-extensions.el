@@ -79,6 +79,7 @@
   :init
   (setq projectile-completion-system 'ivy)
   (setq projectile-switch-project-action #'projectile-dired)
+  (setq projectile-project-search-path '(("~/Projects" . 1)))
   :config
   (projectile-global-mode 1))
 
