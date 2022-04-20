@@ -1,5 +1,55 @@
+# -*- ispell-dictionary: english; -*-
+
 #+TITLE: Emacs configuration
 
 #+STARTUP: indent hidestars content
 
-#+PROPERTY: header-args:emacs-lisp: :tangle init.el
+#+PROPERTY: header-args:emacs-lisp :tangle init.el
+
+* Basic configuration
+
+
+** User interface
+
+Disable startup screen:
+#+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+#+end_src
+
+Do not show initial message in scratch buffer:
+#+begin_src emacs-lisp
+  (setq initial-scratch-message nil)
+#+end_src
+
+Disable scrollbars, tooltips and the toolbar:
+#+begin_src emacs-lisp
+  (if (fboundp 'scroll-bar-mode)
+      (scroll-bar-mode -1))
+  (if (fboundp 'horizontal-scroll-mode)
+      (horizontal-scroll-mode -1))
+  (if (fboundp 'tool-bar-mode)
+      (tool-bar-mode -1))
+  (if (fboundp 'tooltip-mode)
+      (tooltip-mode -1))
+  ;; uncomment to disable the menu bar
+  ;; (if (fboundp 'menu-bar-mode)
+  ;;     (menu-bar-mode -1))
+#+end_src
+
+Set more room for the fringes:
+#+begin_src emacs-lisp
+  (set-fringe-mode 10)
+#+end_src
+
+Turn on the visual bell. In macOS flash the mode line instead of the
+default warning sign:
+#+begin_src emacs-lisp
+  (defun jcp/flash-mode-line ()
+    (invert-face 'mode-line)
+    (run-with-timer 0.1 nil #'invert-face 'mode-line))
+
+  (if (eq system-type 'darwin)
+      (setq visible-bell nil
+            ring-bell-function #'jcp/flash-mode-line)
+    (setq visible-bell t))
+#+end_src
