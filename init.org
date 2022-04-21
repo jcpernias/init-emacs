@@ -53,3 +53,24 @@ default warning sign:
             ring-bell-function #'jcp/flash-mode-line)
     (setq visible-bell t))
 #+end_src
+
+** Frame parameters
+
+Some fuctions for quickly changing the width of the current frame:
+#+begin_src emacs-lisp
+  (defun jcp/set-selected-frame-width (width)
+    (set-frame-width (selected-frame) width))
+
+  (defun jcp/widen-frame ()
+    "Widens the selected frame"
+    (interactive)
+    (jcp/set-selected-frame-width 172))
+
+  (defun jcp/shrink-frame ()
+    "Shrinks the selected frame"
+    (interactive)
+    (jcp/set-selected-frame-width 86))
+
+  (global-set-key (kbd "C-c w") #'jcp/widen-frame)
+  (global-set-key (kbd "C-c s") #'jcp/shrink-frame)
+#+end_src
