@@ -1,1 +1,3 @@
 local.mk
+/.emacs.d/
+/OLD-init.el
