@@ -110,6 +110,11 @@
 ;; undo tree mode
 (use-package undo-tree
   :delight
+  :init
+  (setq jcp/undo-tree-dir (concat user-emacs-directory "undo-tree"))
+  (unless (file-exists-p jcp/undo-tree-dir)
+    (make-directory jcp/undo-tree-dir t))
+  (setq undo-tree-history-directory-alist (list (cons "."  jcp/undo-tree-dir)))
   :config
   (global-undo-tree-mode 1)
   ;; Do not save text properties in undo history:
