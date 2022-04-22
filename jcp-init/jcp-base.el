@@ -21,6 +21,27 @@
 (setq visible-bell nil
       ring-bell-function 'jcp/flash-mode-line)
 
+;; Some fuctions for quickly changing the width of the current frame:
+(defun jcp/set-selected-frame-width (width)
+  (set-frame-width (selected-frame) width))
+
+(setq jcp/wide-frame-width 172
+      jcp/narrow-frame-width 86)
+
+(defun jcp/widen-frame ()
+  "Widens the selected frame"
+  (interactive)
+  (jcp/set-selected-frame-width jcp/wide-frame-width))
+
+(defun jcp/narrow-frame ()
+  "Shrinks the selected frame"
+  (interactive)
+  (jcp/set-selected-frame-width jcp/narrow-frame-width))
+
+(global-set-key (kbd "C-c w") #'jcp/widen-frame)
+(global-set-key (kbd "C-c s") #'jcp/narrow-frame)
+
+
 ;; Set default font and default frame dimensions
 (let ((sname (system-name)))
   (cond
