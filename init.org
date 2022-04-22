@@ -6,6 +6,46 @@
 
 #+PROPERTY: header-args:emacs-lisp :tangle init.el
 
+* Initialize package system
+
+Workaround for a bug in Emacs: https://debbugs.gnu.org/34341
+#+begin_src emacs-lisp
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+#+end_src
+
+Set up the Emacs package system (see
+http://emacs.stackexchange.com/a/5888).
+#+begin_src emacs-lisp
+  (require 'package)
+  (setq package-enable-at-startup nil)
+#+end_src
+
+Package repositories.
+#+begin_src emacs-lisp
+  (setq package-archives
+        '(("gnu"         . "https://elpa.gnu.org/packages/")
+          ("melpa"       . "https://melpa.org/packages/")))
+#+end_src
+
+Initialize Emacs package system.
+#+begin_src emacs-lisp
+  (unless package--initialized
+    (package-initialize))
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+end_src
+
+Install use-package (https://github.com/jwiegley/use-package). Assume
+':ensure t' for every package.
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+#+end_src
+
+
 * Basic configuration
 
 
