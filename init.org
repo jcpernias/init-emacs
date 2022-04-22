@@ -94,8 +94,22 @@ default warning sign:
     (setq visible-bell t))
 #+end_src
 
+
+
 ** Frame parameters
 
+Set Fira Code as the default font.
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :family "Fira Code Retina" :height 150)
+#+end_src
+
+Set default theme. Load hc-zenburn-theme, a higher contrast version
+of the zenburn theme.
+#+begin_src emacs-lisp
+  (use-package hc-zenburn-theme
+    :config
+    (load-theme 'hc-zenburn t))
+#+end_src
 Some fuctions for quickly changing the width of the current frame:
 #+begin_src emacs-lisp
   (defun jcp/set-selected-frame-width (width)
