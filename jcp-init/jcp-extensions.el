@@ -182,7 +182,8 @@
   ;; Org agenda file list
   (setq org-agenda-files
         (mapcar (lambda (x) (concat org-directory x))
-                '("/work.org"
+                '("/notes.org"
+                  "/work.org"
                   "/teaching.org"
                   "/home.org")))
 
