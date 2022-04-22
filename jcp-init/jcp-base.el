@@ -41,6 +41,9 @@
 (global-set-key (kbd "C-c w") #'jcp/widen-frame)
 (global-set-key (kbd "C-c s") #'jcp/narrow-frame)
 
+;; Set [[https://github.com/tonsky/FiraCode][Fira Code]] as
+;; the default font family
+(setq jcp/default-font-family "Fira Code Retina")
 
 ;; Set default font and default frame dimensions
 (let ((sname (system-name)))
@@ -49,7 +52,7 @@
     (progn
       (set-face-attribute
        'default nil
-       :family "Source Code Pro" :height 100 :weight 'normal)
+       :family jcp/default-font-family :height 100 :weight 'normal)
       (setq default-frame-alist
             '((width . 85) (height . 40)
               (vertical-scroll-bars . nil)
@@ -58,7 +61,7 @@
     (progn
       (set-face-attribute
        'default nil
-       :family "Source Code Pro" :height 160 :weight 'normal)
+       :family jcp/default-font-family :height 160 :weight 'normal)
       (setq my-top (- (x-display-pixel-height) 1272)
             my-left (/ (- (x-display-pixel-width) 1730) 2))
       (add-to-list 'initial-frame-alist (cons 'top my-top))
@@ -71,7 +74,7 @@
     (progn
       (set-face-attribute
        'default nil
-       :family "Source Code Pro" :height 150 :weight 'normal)
+       :family jcp/default-font-family :height 150 :weight 'normal)
       (setq my-top (- (x-display-pixel-height) 1020)
             width (nth 3 (assq 'geometry (car (display-monitor-attributes-list))))
             my-left (/ (-  width 1637) 2))
@@ -85,7 +88,7 @@
     (progn
       (set-face-attribute
        'default nil
-       :family "Source Code Pro" :height 150 :weight 'normal)
+       :family jcp/default-font-family :height 150 :weight 'normal)
       (setq default-frame-alist
             '((width . 90) (height . 52)
               (vertical-scroll-bars . nil)
