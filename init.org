@@ -114,3 +114,96 @@ Some fuctions for quickly changing the width of the current frame:
   (global-set-key (kbd "C-c w") #'jcp/widen-frame)
   (global-set-key (kbd "C-c s") #'jcp/shrink-frame)
 #+end_src
+
+* Extensions
+
+** Delight
+
+#+begin_src emacs-lisp
+  (use-package delight
+    :config
+    (delight '((abbrev-mode " Abv" abbrev)
+               (eldoc-mode nil "eldoc")
+               (overwrite-mode " Ov" t)
+               (flyspell-mode " Spell" flyspell)
+               (auto-revert-mode nil autorevert)
+               (lisp-interaction-mode "li" :major)
+               (emacs-lisp-mode "el" :major))))
+#+end_src
+
+** Ivy
+
+See [[https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/?utm_source=share&utm_medium=web2x][here]].
+#+begin_src emacs-lisp
+  (use-package counsel
+    :delight
+    :after ivy
+    :config (counsel-mode))
+
+  (use-package ivy
+    :defer 0.1
+    :delight
+    :bind (("C-c C-r" . ivy-resume)
+           ("C-x B" . ivy-switch-buffer-other-window))
+    :custom
+    (ivy-count-format "(%d/%d) ")
+    (ivy-use-virtual-buffers t)
+    :init
+    (setq ivy-use-selectable-prompt t)
+    :config
+    (ivy-mode))
+
+  (use-package ivy-rich
+    :after ivy
+    :custom
+    (ivy-virtual-abbreviate 'full
+                            ivy-rich-switch-buffer-align-virtual-buffer t
+                            ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+  ;; :init
+  ;; (setq ivy-virtual-abbreviate 'full
+  ;;       ivy-rich-path-style 'abbrev)
+  ;; :config
+  ;; (ivy-rich-mode 1)
+  ;; (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+  (use-package swiper
+    :after ivy
+    :bind (("C-s" . swiper)
+           ("C-r" . swiper)))
+
+  ;; ivy, swiper, counsel
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-c p") 'counsel-compile)
+  (global-set-key (kbd "C-h f") 'counsel-describe-function)
+  (global-set-key (kbd "C-h v") 'counsel-describe-variable)
+  (global-set-key (kbd "C-h l") 'counsel-find-library)
+  (global-set-key (kbd "C-h y") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "C-h u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-s") 'counsel-grep-or-swiper)
+  (global-set-key (kbd "C-r") 'counsel-grep-or-swiper-backward)
+  (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
+
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
+  (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
+  (global-set-key (kbd "C-x B") 'ivy-switch-buffer-other-window)
+#+end_src
+
+
+
+** Magit
+
+#+begin_src emacs-lisp
+(use-package magit
+  :config
+  (add-to-list 'magit-no-confirm 'stage-all-changes)
+  (setq magit-push-always-verify nil)
+  ;; Disable diff before commit
+  ;; (global-magit-file-mode)
+  (setq vc-handled-backends (delq 'Git vc-handled-backends)))
+#+end_src
