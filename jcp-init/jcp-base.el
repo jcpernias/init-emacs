@@ -94,6 +94,7 @@
               (vertical-scroll-bars . nil)
               (horizontal-scroll-bars . nil)))))))
 
+
 ;; Add a newline at the end of files if there is not already one there
 (setq require-final-newline t)
 

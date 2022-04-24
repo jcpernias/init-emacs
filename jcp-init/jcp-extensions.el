@@ -44,6 +44,12 @@
              (lisp-interaction-mode "li" :major)
              (emacs-lisp-mode "el" :major))))
 
+;; Enable Fira Code ligatures. See instructions for downloading Fira Code Symbol [[https://github.com/jming422/fira-code-mode][here]].
+(use-package fira-code-mode
+  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+  :config (global-fira-code-mode))
+
+
 ;; Ivy: see https://www.reddit.com/r/emacs/comments/910pga/tip_how_to_use_ivy_and_its_utilities_in_your/?utm_source=share&utm_medium=web2x
 (use-package counsel
   :delight
