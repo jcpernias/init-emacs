@@ -44,9 +44,11 @@
              (lisp-interaction-mode "li" :major)
              (emacs-lisp-mode "el" :major))))
 
-;; Enable Fira Code ligatures. See instructions for downloading Fira Code Symbol [[https://github.com/jming422/fira-code-mode][here]].
+;; Enable Fira Code ligatures. See instructions for downloading Fira
+;; Code Symbol [[https://github.com/jming422/fira-code-mode][here]].
 (use-package fira-code-mode
-  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+  :custom (fira-code-mode-disabled-ligatures
+           '("[]" "#{" "#(" "#_" "#_(" "{-" "x")) ;; List of ligatures to turn off
   :config (global-fira-code-mode))
 
 
