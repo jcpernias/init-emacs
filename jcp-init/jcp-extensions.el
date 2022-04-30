@@ -224,6 +224,13 @@
     (not (string-match "^\\(R\\|emacs-lisp\\)$" lang)))
   (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 
+  ;; Non-nil means ask for confirmation before executing Emacs Lisp
+  ;; links.  Elisp links can be dangerous. Therefore we advise against
+  ;; setting this variable to nil.  Just change it to ‘y-or-n-p’ if
+  ;; you want to confirm with a single keystroke rather than having to
+  ;; type "yes".
+  (setq org-confirm-elisp-link-function 'y-or-n-p)
+
   (setq org-file-apps
         '((auto-mode . emacs)
           ("\\.mm\\'" . default)
@@ -241,17 +248,21 @@
   :hook
   (org-mode . org-bullets-mode))
 
+;; [[https://github.com/IvanMalison/org-projectile][org-projectile]]
+;; provides functions for the creation of org-mode TODOs that are
+;; associated with projectile projects.
+
 (use-package org-projectile
   :ensure t
   :bind (("C-c n p" . org-projectile-project-todo-completing-read))
+  :commands (org-projectile-open-project)
   :config
   (progn
     (setq org-projectile-projects-file
           (concat org-directory "/projects.org"))
     (ensure-file org-projectile-projects-file)
     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-    (push (org-projectile-project-todo-entry) org-capture-templates))
-  )
+    (push (org-projectile-project-todo-entry) org-capture-templates)))
 
 
 (use-package markdown-mode
