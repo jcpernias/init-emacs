@@ -131,6 +131,9 @@
 (setq ls-lisp-ignore-case 't)
 (setq ls-lisp-use-string-collate nil)
 
+;; Do not automatically display async-shell-command output buffer
+(add-to-list 'display-buffer-alist
+             '("*Async Shell Command*" . (display-buffer-no-window . nil)))
 ;; Dired-x
 (add-hook
  'dired-load-hook
