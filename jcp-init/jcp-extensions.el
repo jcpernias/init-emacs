@@ -366,7 +366,7 @@
                           (ess-nuke-trailing-whitespace)))))
 
   (add-hook 'inferior-ess-mode-hook
-            '(lambda()
+            (lambda()
                (setq comint-scroll-to-bottom-on-input t)
                (setq comint-scroll-to-bottom-on-output t)
                (setq comint-move-point-for-output t)
@@ -465,7 +465,7 @@
   :mode "\\.yml\\'"
   :config
   (add-hook 'yaml-mode-hook
-      '(lambda ()
+      (lambda ()
          (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 ;; Moodle Gift files
