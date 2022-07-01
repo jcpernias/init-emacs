@@ -12,12 +12,14 @@
     (exec-path-from-shell-initialize)))
 
 ;; use system trash
-(when (eq system-type 'darwin)
-  (use-package osx-trash
-    :ensure t
-    :config
-    (osx-trash-setup)))
-(setq delete-by-moving-to-trash t)
+
+(use-package osx-trash
+  :ensure t
+  :init
+  (setq delete-by-moving-to-trash t)
+  :config
+  (osx-trash-setup))
+
 
 ;; unset keybinding for printing
 (global-unset-key (kbd "s-p"))
