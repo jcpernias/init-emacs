@@ -480,3 +480,6 @@
   :mode "\\.csv$")
 
 (provide 'jcp-extensions)
+
+;; quarto mode
+(use-package quarto-mode)
