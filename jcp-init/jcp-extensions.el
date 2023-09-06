@@ -79,7 +79,7 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package swiper
-  :after ivy)
+   :after ivy)
 
 ;; projectile
 (use-package projectile
@@ -116,26 +116,26 @@
   (window-numbering-mode))
 
 ;; undo tree mode
-;; (use-package undo-tree
-;;   :delight
-;;   :init
-;;   (setq jcp/undo-tree-dir (concat user-emacs-directory "undo-tree"))
-;;   (unless (file-exists-p jcp/undo-tree-dir)
-;;     (make-directory jcp/undo-tree-dir t))
-;;   (setq undo-tree-history-directory-alist (list (cons "."  jcp/undo-tree-dir)))
-;;   :config
-;;   (global-undo-tree-mode 1)
-;;   ;; Do not save text properties in undo history:
-;;   ;; see https://emacs.stackexchange.com/a/31130
-;;   (defun nadvice/undo-tree-ignore-text-properties (old-fun &rest args)
-;;     (dolist (item buffer-undo-list)
-;;       (and (consp item)
-;;            (stringp (car item))
-;;            (setcar item (substring-no-properties (car item)))))
-;;     (apply old-fun args))
+(use-package undo-tree
+  :delight
+  :init
+  (setq jcp/undo-tree-dir (concat user-emacs-directory "undo-tree"))
+  (unless (file-exists-p jcp/undo-tree-dir)
+    (make-directory jcp/undo-tree-dir t))
+  (setq undo-tree-history-directory-alist (list (cons "."  jcp/undo-tree-dir)))
+  :config
+  (global-undo-tree-mode 1)
+  ;; Do not save text properties in undo history:
+  ;; see https://emacs.stackexchange.com/a/31130
+  (defun nadvice/undo-tree-ignore-text-properties (old-fun &rest args)
+    (dolist (item buffer-undo-list)
+      (and (consp item)
+           (stringp (car item))
+           (setcar item (substring-no-properties (car item)))))
+    (apply old-fun args))
 
-;;   (advice-add 'undo-list-transfer-to-tree :around
-;;               #'nadvice/undo-tree-ignore-text-properties))
+  (advice-add 'undo-list-transfer-to-tree :around
+              #'nadvice/undo-tree-ignore-text-properties))
 
 ;; multiple cursors
 (use-package multiple-cursors)
