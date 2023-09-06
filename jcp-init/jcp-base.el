@@ -89,6 +89,10 @@
       (set-face-attribute
        'default nil
        :family jcp/default-font-family :height 150 :weight 'normal)
+            (setq my-top (- (x-display-pixel-height) 1050)
+            my-left (/ (-  (x-display-pixel-width) 837) 2))
+      (add-to-list 'initial-frame-alist (cons 'top my-top))
+      (add-to-list 'initial-frame-alist (cons 'left my-left))
       (setq default-frame-alist
             '((width . 90) (height . 52)
               (vertical-scroll-bars . nil)
